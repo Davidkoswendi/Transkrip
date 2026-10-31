@@ -1,7 +1,7 @@
 const $=id=>document.getElementById(id);
 const ic=n=>`<svg class="i"><use href="#i-${n}"/></svg>`;
 const store={get(k,d){try{return localStorage.getItem(k)??d}catch{return d}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
-// deteksi perangkat mobile / layar sentuh: dipakai untuk mode hemat (animasi, memori, model)
+// deteksi perangkat mobile / layar sentuh: hanya dipakai untuk mode hemat tampilan (animasi)
 const LITE=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Mac/i.test(navigator.platform))||(matchMedia('(pointer:coarse)').matches&&innerWidth<900);
 let mode='video',file=null,segs=[],worker=null,duration=0,peaks=[],media=$('video'),job=0,running=false,playing=false,heroVis=true;
 const W={key:'',base:null,on:null,last:-1}; // cache gambar gelombang suara
@@ -62,15 +62,10 @@ function pick(f){
   const el=document.createElement(mode==='video'?'video':'audio');el.preload='metadata';const u=URL.createObjectURL(f);el.src=u;
   el.onloadedmetadata=()=>{if(isFinite(el.duration))$('cM').textContent=(f.size/1048576).toFixed(1)+' MB · '+fmt(el.duration);URL.revokeObjectURL(u);el.removeAttribute('src');el.load()};
   $('go').disabled=false;$('goHint').textContent='Siap. Klik mulai, dan kamu bisa membatalkan kapan saja.';
-  if(LITE&&f.size>300*1048576)toast('File besar, HP bisa kehabisan memori. Untuk file panjang, potong dulu atau pakai mode Kilat/Seimbang.',true,5000);
 }
 function clearFile(){file=null;$('file').value='';$('chip').hidden=true;$('drop').hidden=false;$('go').disabled=true;$('goHint').textContent='Pilih file dulu untuk memulai. Pertama kali, model diunduh sekali lalu tersimpan.'}
 $('lang').value=store.get('sabda-lang','indonesian');
 {const m=store.get('sabda-model','onnx-community/whisper-base');const r=document.querySelector(`[name=mdl][value="${m}"]`);if(r)r.checked=true}
-if(LITE){ // peringatan jujur untuk model terbesar di HP
-  const sm=document.querySelector('#m3+label small');if(sm)sm.textContent='±560 MB · sangat berat di HP';
-  document.querySelectorAll('[name=mdl]').forEach(r=>r.onchange=()=>{if(/small/.test(r.value))toast('Mode Teliti sangat berat untuk HP. Jika aplikasi tertutup sendiri, pakai Seimbang.',false,4500)});
-}
 
 // ---------- audio extraction ----------
 // Decode langsung ke 16 kHz lewat OfflineAudioContext. Jauh lebih hemat memori
@@ -104,23 +99,18 @@ function plan(a,sr,len){
     if(end>=n-8*sr)end=n;
     else{
       var best=end,bv=Infinity,w=1600;
-      for(var c=end-4*sr;c<=end+4*sr;c+=w){var s=0;for(var k=c;k<c+w&&k<n;k+=4)s+=a[k]*a[k];if(s<bv){bv=s;best=c+w/2}}
+      for(var c=end-4*sr;c<=end+4*sr;c+=w){var s=0;for(var k=c;k<c+w&&k<n;k++)s+=a[k]*a[k];if(s<bv){bv=s;best=c+w/2}}
       end=Math.floor(best);
     }
     out.push({offset:st/sr,start:st,end:end});st=end;
   }
   return out;
 }
-async function f16ok(){try{if(!self.navigator.gpu)return false;var ad=await self.navigator.gpu.requestAdapter();return !!(ad&&ad.features&&ad.features.has('shader-f16'))}catch(e){return false}}
 self.onmessage=async({data})=>{
   const a=data.audio,blocks=plan(a,16000,60);
   self.postMessage({type:'plan',ends:blocks.map(b=>b.end/16000)});
-  if(data.mobile){try{env.backends.onnx.wasm.numThreads=Math.min(2,self.navigator.hardwareConcurrency||2)}catch(e){}}
-  const big=/small/.test(data.model),tries=[];
-  if(data.device==='webgpu'){
-    if(data.mobile&&await f16ok())tries.push({dev:'webgpu',dtype:'fp16'});
-    if(!(data.mobile&&big))tries.push({dev:'webgpu',dtype:{encoder_model:'fp32',decoder_model_merged:'q4'}});
-  }
+  const tries=[];
+  if(data.device==='webgpu')tries.push({dev:'webgpu',dtype:{encoder_model:'fp32',decoder_model_merged:'q4'}});
   tries.push({dev:'wasm',dtype:'q8'});
   for(let t=0;t<tries.length;t++){
     const cfg=tries[t];let asr=null;
@@ -270,7 +260,7 @@ function run(audio,model,lang,my){
     else if(data.type==='done')finish(my);
     else if(data.type==='error')fail('Waduh, ada masalah: '+data.message);
   };
-  worker.postMessage({audio,model,lang,device:navigator.gpu?'webgpu':'wasm',mobile:LITE},[audio.buffer]);
+  worker.postMessage({audio,model,lang,device:navigator.gpu?'webgpu':'wasm'},[audio.buffer]);
 }
 function finish(my){
   if(worker){worker.terminate();worker=null} // lepaskan memori model sebelum menampilkan hasil
