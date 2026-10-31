@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sabda — suara jadi tulisan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+<symbol id="i-vid" viewBox="0 0 24 24"><rect x="2" y="5" width="14" height="14" rx="3"/><path d="M22 8l-6 4 6 4z"/></symbol>
+<symbol id="i-aud" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+<symbol id="i-dl" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+<symbol id="i-ok" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+<symbol id="i-new" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+</defs></svg>
+
+<div class="aurora"><i></i><i></i><i></i></div>
+<div class="dragov" id="dragov"><div><svg class="i"><use href="#i-up"/></svg>Lepaskan file di mana saja</div></div>
+<div class="toasts" id="toasts"></div>
+
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="#"><i><b></b><b></b><b></b><b></b></i>Sabda</a>
+    <nav><a href="#mulai">Mulai</a><a href="#cara">Cara kerja</a><a href="#tanya">Tanya jawab</a>
+      <button class="ibtn" id="theme" aria-label="Ganti tema"><svg class="i"><use id="themeIc" href="#i-moon"/></svg></button></nav>
+  </div>
+
+  <section class="hero">
+    <div>
+      <span class="badge">Gratis, tanpa akun, tanpa upload ke server</span>
+      <h1><span class="ln" style="--i:0">Ubah</span> <span class="ln rot" style="--i:1"><ul><li>rekaman kuliah</li><li>video wawancara</li><li>podcast</li><li>rapat tim</li><li>rekaman kuliah</li></ul></span><br><span class="ln" style="--i:2">jadi tulisan rapi.</span></h1>
+      <p class="lead">Taruh video atau rekaman suara, Sabda menuliskannya lengkap dengan stempel waktu. Bisa dicari, dikoreksi, dan diunduh sebagai subtitle. Semua diproses di perangkatmu sendiri.</p>
+      <div class="cta"><a class="btn pri" href="#mulai" style="padding:14px 24px"><svg class="i"><use href="#i-up"/></svg>Mulai transkrip</a><a class="btn" href="#cara" style="padding:14px 22px">Lihat cara kerja</a></div>
+    </div>
+    <div class="demo">
+      <div class="dcard">
+        <div class="dbar" id="dbar"></div>
+        <p class="on"><b>00:03</b>Selamat datang di kuliah pengantar hari ini.</p>
+        <p><b>00:09</b>Kita mulai dari konsep dasar transkripsi suara.</p>
+        <p><b>00:16</b>Klik waktunya, video langsung lompat ke sana.</p>
+      </div>
+      <div class="chip a"><svg class="i"><use href="#i-shield"/></svg>Diproses di perangkatmu</div>
+      <div class="chip b"><svg class="i"><use href="#i-dl"/></svg>TXT · SRT · VTT</div>
+    </div>
+  </section>
+
+  <section id="mulai">
+    <div class="seg2" id="seg2" data-m="video">
+      <i class="pill"></i>
+      <button class="on" data-m="video"><svg class="i"><use href="#i-vid"/></svg>Video ke Teks</button>
+      <button data-m="audio"><svg class="i"><use href="#i-aud"/></svg>Audio ke Teks</button>
+    </div>
+
+    <div class="card" id="work">
+      <div id="setup">
+        <div class="drop" id="drop" tabindex="0" role="button" aria-label="Pilih file">
+          <div class="ic"><svg class="i"><use href="#i-up"/></svg></div>
+          <h3 id="dT">Jatuhkan video di sini</h3>
+          <p>atau klik untuk memilih dari perangkatmu</p>
+          <div class="fmts" id="fmts"><span>MP4</span><span>MOV</span><span>WEBM</span><span>MKV</span></div>
+          <input type="file" id="file" hidden>
+        </div>
+        <div class="file" id="chip" hidden>
+          <div class="fi"><svg class="i"><use id="chipIc" href="#i-vid"/></svg></div>
+          <div><b id="cN"></b><small id="cM"></small></div>
+          <button class="btn" id="chg">Ganti</button>
+          <button class="ibtn" id="clr" aria-label="Hapus file"><svg class="i"><use href="#i-x"/></svg></button>
+        </div>
+        <div class="opts">
+          <div>
+            <label class="lab" for="lang">Bahasa dalam rekaman</label>
+            <select id="lang"><option value="indonesian">Indonesia</option><option value="english">Inggris</option><option value="javanese">Jawa</option><option value="sundanese">Sunda</option><option value="malay">Melayu</option><option value="auto">Deteksi otomatis</option></select>
+          </div>
+          <div>
+            <span class="lab">Tingkat ketelitian</span>
+            <div class="mods" role="radiogroup" aria-label="Tingkat ketelitian">
+              <input type="radio" name="mdl" id="m1" value="onnx-community/whisper-tiny">
+              <label for="m1"><span class="ck"></span><b>Kilat</b><small>±40 MB · paling cepat</small></label>
+
+              <input type="radio" name="mdl" id="m2" value="onnx-community/whisper-base" checked>
+              <label for="m2"><em class="tag">Disarankan</em><span class="ck"></span><b>Seimbang</b><small>±75 MB · cepat & rapi</small></label>
+
+              <input type="radio" name="mdl" id="m3" value="onnx-community/whisper-small">
+              <label for="m3"><span class="ck"></span><b>Teliti</b><small>±250 MB · paling akurat</small></label>
+            </div>
+          </div>
+        </div>
+        <button class="btn pri go" id="go" disabled><svg class="i"><use href="#i-play"/></svg>Mulai transkrip</button>
+        <p class="hint" id="goHint">Pilih file dulu untuk memulai. Pertama kali, model diunduh sekali lalu tersimpan.</p>
+      </div>
+
+      <div class="proc" id="proc" hidden>
+        <div class="ptop">
+          <div><div class="phase"><span id="phase">Menyiapkan</span><span class="dots"><i></i><i></i><i></i></span></div><p class="phsub" id="phsub"></p></div>
+          <div class="pct" id="pct">0%</div>
+        </div>
+        <canvas id="viz"></canvas>
+        <div class="pbar"><i id="pfill"></i></div>
+        <ol class="tl" id="tl">
+          <li><div class="dot"><svg class="i"><use href="#i-ok"/></svg></div>Ambil suara</li>
+          <li><div class="dot"><svg class="i"><use href="#i-ok"/></svg></div>Siapkan model</li>
+          <li><div class="dot"><svg class="i"><use href="#i-ok"/></svg></div>Menulis</li>
+          <li><div class="dot"><svg class="i"><use href="#i-ok"/></svg></div>Rapikan</li>
+        </ol>
+        <div class="info">
+          <div><small>File</small><b id="iN"></b></div><div><small>Durasi</small><b id="iD">-</b></div>
+          <div><small>Berjalan</small><b id="iE">00:00</b></div><div><small>Perkiraan sisa</small><b id="iT">menghitung…</b></div>
+        </div>
+        <div class="live"><small>Hasil sementara</small><div id="liveBox"><div class="sk"></div><div class="sk"></div><div class="sk"></div></div></div>
+        <div class="tip" id="tip"><svg class="i"><use href="#i-bulb"/></svg><span id="tipT"></span></div>
+        <div class="pfoot"><button class="btn" id="cancel"><svg class="i"><use href="#i-x"/></svg>Batalkan</button></div>
+      </div>
+
+      <div class="okb" id="okb" hidden>
+        <svg class="big" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28"/><path d="M19 33l9 9 17-19"/></svg>
+        <div><h3>Transkrip selesai</h3><p id="okT"></p></div>
+        <button class="btn pri" id="again"><svg class="i"><use href="#i-new"/></svg>Transkrip file lain</button>
+      </div>
+    </div>
+
+    <div id="res" hidden>
+      <div class="rh">
+        <h2>Hasil transkrip</h2>
+        <div class="stats"><div class="stat"><small>Durasi</small><b id="sD">0</b></div><div class="stat"><small>Kata</small><b id="sW">0</b></div><div class="stat"><small>Segmen</small><b id="sS">0</b></div></div>
+      </div>
+      <div class="res">
+        <div class="left card">
+          <video id="video" controls playsinline></video>
+          <audio id="audio" controls hidden></audio>
+          <canvas id="wave"></canvas>
+          <p class="fname" id="fname"></p>
+          <div class="grp">
+            <button class="btn" data-dl="txt"><svg class="i"><use href="#i-dl"/></svg>TXT</button>
+            <button class="btn" data-dl="srt"><svg class="i"><use href="#i-dl"/></svg>SRT</button>
+            <button class="btn" data-dl="vtt"><svg class="i"><use href="#i-dl"/></svg>VTT</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="tools">
+            <div class="vm" id="vm" role="group" aria-label="Tampilan transkrip"><button data-v="seg" class="on">Per kalimat</button><button data-v="para">Paragraf rapi</button></div>
+          </div>
+          <div class="tools">
+            <div class="sbox"><svg class="i"><use href="#i-search"/></svg><input type="search" id="q" placeholder="Cari kata di transkrip"><button id="qx" hidden aria-label="Hapus pencarian"><svg class="i"><use href="#i-x"/></svg></button></div>
+            <button class="btn" id="copy"><svg class="i"><use href="#i-copy"/></svg>Salin</button>
+          </div>
+          <div class="tools">
+            <label class="sw"><input type="checkbox" id="tm" checked><i></i>Waktu</label>
+            <label class="sw"><input type="checkbox" id="fl" checked><i></i>Ikuti video</label>
+            <span class="note" id="count" style="margin:0 0 0 auto"></span>
+          </div>
+          <div class="list" id="list"></div>
+          <p class="note">Klik teks untuk mengoreksi, klik waktu untuk memutar. Spasi untuk putar/jeda.</p>
+          <p class="note" id="paraNote" hidden>Tampilan paragraf menyatukan kalimat yang berdekatan dan merapikan huruf kapital serta tanda baca. Koreksi di sini berlaku untuk salin dan TXT. File SRT dan VTT tetap per segmen agar cocok sebagai subtitle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="cara">
+    <h2 class="rv">Gimana cara kerjanya?</h2>
+    <p class="sub rv" style="--i:1">Tidak ada server dan tidak ada file yang dikirim. Semuanya terjadi di browsermu.</p>
+    <div class="how">
+      <div class="st rv" style="--i:1"><div class="n">01</div><h3>Pilih dan jatuhkan</h3><p>Pilih mode Video atau Audio, jatuhkan filenya, lalu atur bahasa dan ketelitian.</p></div>
+      <div class="st rv" style="--i:2"><div class="n">02</div><h3>Suara diambil</h3><p>Browser membuka file dan memadatkan suaranya jadi mono 16 kHz, format yang dipahami model.</p></div>
+      <div class="st rv" style="--i:3"><div class="n">03</div><h3>Whisper menulis</h3><p>Model AI Whisper dari OpenAI mendengarkan per bagian dan menulis teks beserta waktunya.</p></div>
+      <div class="st rv" style="--i:4"><div class="n">04</div><h3>Rapikan dan bawa</h3><p>Koreksi langsung di teks, cari kata, lalu salin atau unduh sebagai TXT, SRT, atau VTT.</p></div>
+    </div>
+  </section>
+
+  <section class="s" id="tanya">
+    <h2 class="rv">Sering ditanyakan</h2>
+    <p class="sub rv" style="--i:1">Beberapa hal yang biasanya ingin diketahui sebelum mulai.</p>
+    <details class="rv"><summary>Apakah file saya dikirim ke internet?</summary><p>Tidak. Video dan audio diproses di perangkatmu. Internet hanya dipakai untuk mengunduh model sekali, lalu disimpan di cache browser.</p></details>
+    <details class="rv"><summary>Kenapa pertama kali lama?</summary><p>Model harus diunduh dulu (40 sampai 250 MB). Setelah itu langsung siap, dan prosesnya lebih cepat.</p></details>
+    <details class="rv"><summary>Bagaimana supaya hasilnya akurat?</summary><p>Pilih bahasa yang tepat, pakai ketelitian "Teliti" untuk hasil final, dan gunakan rekaman yang jelas tanpa musik keras. Kata yang meleset bisa diklik dan diperbaiki langsung.</p></details>
+    <details class="rv"><summary>Prosesnya lambat atau gagal, kenapa?</summary><p>Pakai Chrome atau Edge terbaru agar WebGPU aktif (jauh lebih cepat). Untuk file sangat panjang, coba ketelitian "Kilat" atau potong file dulu.</p></details>
+    <details class="rv"><summary>SRT dan VTT itu apa?</summary><p>Format subtitle. Pakai di YouTube, CapCut, Premiere, atau pemutar video agar teks tampil di layar sesuai waktunya.</p></details>
+  </section>
+  <footer>Dibuat dengan Whisper dan Transformers.js. Berjalan sepenuhnya di browser.</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
